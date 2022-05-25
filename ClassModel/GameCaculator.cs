@@ -93,7 +93,9 @@ namespace ClassModel
         /// <returns>两个用户之间的相似度</returns>
         private float SimilarityInSingleUser(UsersWithGamesModel usersWithGames1, UsersWithGamesModel usersWithGames2)
         {
-            return 0.0f;
+            MyHexagon hexagon1 = new MyHexagon(usersWithGames1.Evaluation);
+            MyHexagon hexagon2 = new MyHexagon(usersWithGames2.Evaluation);
+            return hexagon1.GetOverloapArea(hexagon2);
         }
         #endregion
 
