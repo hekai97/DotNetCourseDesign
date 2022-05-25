@@ -262,8 +262,8 @@ namespace ClassModel
         /// <returns></returns>
         private List<GameModel> GetRecommond(ref List<GameModel> existGamesModel,
             ref List<GameModel> allGames,
-            ref List<(string,float)> tagsWeightList,
-            ref List<float> evaluationList,
+            ref List<(string,float)> tagsWeightListPercent,
+            ref List<float> evaluationListPercent,
             int value,
             float existTagsWeight=0.8f,
             float tagsWeight=0.5f
