@@ -34,17 +34,19 @@
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.button1 = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
+			this.listBox5 = new System.Windows.Forms.ListBox();
+			this.listBox4 = new System.Windows.Forms.ListBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.listBox3 = new System.Windows.Forms.ListBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.六边形 = new System.Windows.Forms.ListBox();
 			this.listBox1 = new System.Windows.Forms.ListBox();
 			this.listBox2 = new System.Windows.Forms.ListBox();
-			this.六边形 = new System.Windows.Forms.ListBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.listBox3 = new System.Windows.Forms.ListBox();
-			this.label5 = new System.Windows.Forms.Label();
-			this.listBox4 = new System.Windows.Forms.ListBox();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button3 = new System.Windows.Forms.Button();
-			this.listBox5 = new System.Windows.Forms.ListBox();
+			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -105,6 +107,69 @@
 			this.panel1.TabIndex = 5;
 			this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
 			// 
+			// listBox5
+			// 
+			this.listBox5.FormattingEnabled = true;
+			this.listBox5.ItemHeight = 15;
+			this.listBox5.Location = new System.Drawing.Point(117, 203);
+			this.listBox5.Name = "listBox5";
+			this.listBox5.Size = new System.Drawing.Size(120, 169);
+			this.listBox5.TabIndex = 7;
+			// 
+			// listBox4
+			// 
+			this.listBox4.FormattingEnabled = true;
+			this.listBox4.ItemHeight = 15;
+			this.listBox4.Location = new System.Drawing.Point(258, 203);
+			this.listBox4.Name = "listBox4";
+			this.listBox4.Size = new System.Drawing.Size(114, 169);
+			this.listBox4.TabIndex = 6;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(255, 168);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(97, 15);
+			this.label5.TabIndex = 5;
+			this.label5.Text = "可能想认识：";
+			// 
+			// listBox3
+			// 
+			this.listBox3.FormattingEnabled = true;
+			this.listBox3.ItemHeight = 15;
+			this.listBox3.Location = new System.Drawing.Point(20, 203);
+			this.listBox3.Name = "listBox3";
+			this.listBox3.Size = new System.Drawing.Size(104, 169);
+			this.listBox3.TabIndex = 4;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(17, 168);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(82, 15);
+			this.label4.TabIndex = 3;
+			this.label4.Text = "猜你喜欢：";
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(222, 77);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(52, 15);
+			this.label3.TabIndex = 1;
+			this.label3.Text = "用户名";
+			// 
+			// 六边形
+			// 
+			this.六边形.FormattingEnabled = true;
+			this.六边形.ItemHeight = 15;
+			this.六边形.Location = new System.Drawing.Point(20, 19);
+			this.六边形.Name = "六边形";
+			this.六边形.Size = new System.Drawing.Size(125, 109);
+			this.六边形.TabIndex = 0;
+			// 
 			// listBox1
 			// 
 			this.listBox1.FormattingEnabled = true;
@@ -122,60 +187,6 @@
 			this.listBox2.Name = "listBox2";
 			this.listBox2.Size = new System.Drawing.Size(194, 214);
 			this.listBox2.TabIndex = 7;
-			// 
-			// 六边形
-			// 
-			this.六边形.FormattingEnabled = true;
-			this.六边形.ItemHeight = 15;
-			this.六边形.Location = new System.Drawing.Point(20, 19);
-			this.六边形.Name = "六边形";
-			this.六边形.Size = new System.Drawing.Size(125, 109);
-			this.六边形.TabIndex = 0;
-			// 
-			// label3
-			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(222, 77);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(52, 15);
-			this.label3.TabIndex = 1;
-			this.label3.Text = "用户名";
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(17, 168);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(82, 15);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "猜你喜欢：";
-			// 
-			// listBox3
-			// 
-			this.listBox3.FormattingEnabled = true;
-			this.listBox3.ItemHeight = 15;
-			this.listBox3.Location = new System.Drawing.Point(20, 203);
-			this.listBox3.Name = "listBox3";
-			this.listBox3.Size = new System.Drawing.Size(104, 169);
-			this.listBox3.TabIndex = 4;
-			// 
-			// label5
-			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(255, 168);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(97, 15);
-			this.label5.TabIndex = 5;
-			this.label5.Text = "可能想认识：";
-			// 
-			// listBox4
-			// 
-			this.listBox4.FormattingEnabled = true;
-			this.listBox4.ItemHeight = 15;
-			this.listBox4.Location = new System.Drawing.Point(258, 203);
-			this.listBox4.Name = "listBox4";
-			this.listBox4.Size = new System.Drawing.Size(114, 169);
-			this.listBox4.TabIndex = 6;
 			// 
 			// button2
 			// 
@@ -195,20 +206,29 @@
 			this.button3.Text = "推荐玩家";
 			this.button3.UseVisualStyleBackColor = true;
 			// 
-			// listBox5
+			// textBox3
 			// 
-			this.listBox5.FormattingEnabled = true;
-			this.listBox5.ItemHeight = 15;
-			this.listBox5.Location = new System.Drawing.Point(117, 203);
-			this.listBox5.Name = "listBox5";
-			this.listBox5.Size = new System.Drawing.Size(120, 169);
-			this.listBox5.TabIndex = 7;
+			this.textBox3.Location = new System.Drawing.Point(158, 18);
+			this.textBox3.Name = "textBox3";
+			this.textBox3.Size = new System.Drawing.Size(191, 25);
+			this.textBox3.TabIndex = 10;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(96, 28);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(37, 15);
+			this.label6.TabIndex = 11;
+			this.label6.Text = "密码";
 			// 
 			// TestForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(928, 450);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.textBox3);
 			this.Controls.Add(this.button3);
 			this.Controls.Add(this.button2);
 			this.Controls.Add(this.listBox2);
@@ -247,5 +267,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.Label label6;
 	}
 }
