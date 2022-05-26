@@ -57,6 +57,7 @@ namespace DataGenerationConsole
             WriteToFile writeToFile = new WriteToFile();
             writeToFile.initGameName(basePath, 10000);
             writeToFile.GenerationGamesToDataBases(basePath);
+
         }
 
         public static void TestReadSpeed()
