@@ -97,6 +97,10 @@
       <Project>{E05DB281-01F8-4415-8BFA-51838DD1CC93}</Project>
       <Name>ClassModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataBaseClass\DAL.csproj">
+      <Project>{C2B10B73-52A7-448B-85F8-163812113501}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

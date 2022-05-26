@@ -1,4 +1,5 @@
 ﻿using ClassModel;
+using DataBaseClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,14 +14,22 @@ namespace DotnetCourseDesign
 {
     public partial class MainForm : Form
     {
+        GameCaculator gameCaculator=new GameCaculator();
+        GameOperator gameOperator = new GameOperator();
+        UserOperator userOperator = new UserOperator();
+        UsersWithGamesModel selectedUser = null;
+        List<GameModel> allGames;
+
         List<string> userNameList = new List<string>();
         List<UsersWithGamesModel> userList = new List<UsersWithGamesModel>();
         public MainForm()
         {
             InitializeComponent();
+
+            allGames=gameOperator.GetAllGameList();
+
             showUsersListBox.DataSource = userNameList;
         }
-
         private void showUsersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             showUserPlayedGames.DataSource = null;
@@ -32,7 +41,6 @@ namespace DotnetCourseDesign
                 showUserPlayedGames.DataSource = userList[selectIndex].Games;
             }
         }
-
         private void addButton_Click(object sender, EventArgs e)
         {
             if (userNameInputTextBox.Text.Equals("") || userInputGameTextBox.Text.Equals(""))
@@ -65,8 +73,9 @@ namespace DotnetCourseDesign
             showUsersListBox.DataSource = userNameList;
             int selectIndex = FindUserIndexByName(userName);
             showUsersListBox.SelectedIndex = selectIndex;
-        }
 
+            selectedUser=userList[selectIndex];
+        }
         private int FindUserIndexByName(string name)
         {
             for(int i = 0; i < userList.Count; i++)
@@ -99,6 +108,23 @@ namespace DotnetCourseDesign
                 }
             }
             return false;
+        }
+
+        private void recommondGameButton_Click(object sender, EventArgs e)
+        {
+            if (selectedUser != null)
+            {
+                List<GameModel> recommondedGames = gameCaculator.RecommondGames(ref selectedUser, ref allGames);
+            }
+            else
+            {
+                MessageBox.Show("请先添加用户","提示",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+        private void recommondUserButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
