@@ -218,13 +218,14 @@ namespace ClassModel
         private List<float> GetAverageEvaluation(List<List<float>> evaluations)
         {
             int length = evaluations[0].Count;
-            List<float> result = new List<float>(length);
+            List<float> result = new List<float>();
 
-            for(int i = 0; i < evaluations.Count; ++i)
+            for(int i = 0; i < length; ++i)
             {
-                for(int j = 0; j < length; ++j)
+                result.Add(0.0f);
+                for(int j = 0; j < evaluations.Count; ++j)
                 {
-                    result[j] += evaluations[i][j];
+                    result[i] += evaluations[j][i];
                 }
             }
             for(int i = 0; i < length; ++i)
@@ -273,25 +274,76 @@ namespace ClassModel
         {
             List<(GameModel, float)> gameWithOverview = new List<(GameModel, float)>();
             List<GameModel> result = new List<GameModel>();
-            foreach(GameModel games in allGames)
+            foreach (GameModel games in allGames)
             {
                 if (existGamesModel.Contains(games))
                 {
                     continue;
                 }
-                //算出存在标签的权值之和
-
-                //算出不存在标签的权值之和
-
-                //算出六部图的比例和
-
-                //上面三个相加，得到总体评价
-
+                //获取目标游戏和玩家喜好的相似度（相似分数）
+                float score = getSimilarity(tagsWeightListPercent, evaluationListPercent, games, existTagsWeight, tagsWeight);
+                gameWithOverview.Add((games, score));
+            }
+            //降序排序
+            List<(GameModel, float)> orderedGameWithOverview = gameWithOverview.OrderByDescending(a => a.Item2).ToList();
+            //填充result至value个
+            for (int i = 0; i < value; i++)
+            {
+                if (i < orderedGameWithOverview.Count)
+                {
+                    result.Add(orderedGameWithOverview[i].Item1);
+                }
             }
 
             return result;
         }
 
+        #endregion
+
+
+        #region 获取一款游戏和玩家喜好游戏群的相似度
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tagsWeightListPercent">同GetRecommond方法</param>
+        /// <param name="evaluationListPercent">同GetRecommond方法</param>
+        /// <param name="theGame">需要进行比较相似度的游戏</param>
+        /// <param name="existTagsWeight">同GetRecommond方法</param>
+        /// <param name="tagsWeight">同GetRecommond方法</param>
+        /// <returns></returns>
+        private float getSimilarity(List<(string, float)> tagsWeightListPercent, List<float> evaluationListPercent, GameModel theGame, float existTagsWeight, float tagsWeight)
+        {
+            //获取游戏的tag哈希表 元素类型为(string, float)
+            Hashtable hashtable = theGame.GetHashtable();
+            //获取游戏的六边形值
+            List<float> evaluationListPercentOfTheGame = theGame.Evaluation;
+            //初始化三个评分
+            float retExist = 0;
+            float retUnExist = 0;
+            float retEvaluation = 0;
+            //算出存在标签的权值之和
+            foreach ((string, float) i in tagsWeightListPercent)
+            {
+                if (hashtable.ContainsKey(i.Item1))
+                {
+                    retExist += i.Item2 * (float)hashtable[i.Item1];
+                    hashtable.Remove(i.Item1);
+                }
+            }
+
+
+            //算出不存在标签的权值之和
+            foreach (var i in hashtable)
+                retUnExist += (float)hashtable[i];
+
+            //算出六部图的比例和
+            for (int i = 0; i < evaluationListPercent.Count; i++)
+                retEvaluation += evaluationListPercent[i] * evaluationListPercentOfTheGame[i];
+
+            //上面三个相加，得到总体评价
+            float ret = (float)((retExist * existTagsWeight + retUnExist * (1.0 - existTagsWeight)) * tagsWeight + retEvaluation * (1 - tagsWeight));
+            return ret;
+        }
         #endregion
     }
 }

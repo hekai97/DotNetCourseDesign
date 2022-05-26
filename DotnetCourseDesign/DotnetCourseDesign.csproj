@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +78,7 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +96,10 @@
     <ProjectReference Include="..\ClassModel\ClassModel.csproj">
       <Project>{E05DB281-01F8-4415-8BFA-51838DD1CC93}</Project>
       <Name>ClassModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseClass\DAL.csproj">
+      <Project>{C2B10B73-52A7-448B-85F8-163812113501}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

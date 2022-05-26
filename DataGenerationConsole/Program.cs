@@ -14,7 +14,7 @@ namespace DataGenerationConsole
     {
         static void Main(string[] args)
         {
-            //string basePath = @"E:\Codes\VS2022\DotNetCourseDesign\DataGenerationConsole";
+            string basePath = @"E:\Codes\VS2022\DotNetCourseDesign\DataGenerationConsole";
             //WriteToFile writeToFile = new WriteToFile();
             //writeToFile.initGameName(basePath, 10000);
             #region 暂时无用的代码
@@ -44,7 +44,10 @@ namespace DataGenerationConsole
             //GameOperator gameOperator = new GameOperator();
             //gameOperator.InsertGameList(result);
             #endregion
-            
+
+            //WriteToFile wr = new WriteToFile();
+            //wr.GenerationGamesToDataBases(basePath);
+
             TestReadSpeed();
             Console.ReadLine();
         }

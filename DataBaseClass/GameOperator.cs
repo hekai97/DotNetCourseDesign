@@ -52,6 +52,9 @@ namespace DataBaseClass
                 gameModel.GameName = dataReader.GetString(1);
                 gameModel.GameTagsAndWeights=TextToList.TextToPairList(dataReader.GetString(2));
                 gameModel.Evaluation=TextToList.TextToFloatList(dataReader.GetString(3));
+
+                gameModel.ListToHash();
+
                 list.Add(gameModel);
             }
             return list;
