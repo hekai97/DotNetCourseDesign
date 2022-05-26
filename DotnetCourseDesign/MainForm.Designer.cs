@@ -110,7 +110,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(289, 79);
+            this.label6.Location = new System.Drawing.Point(288, 77);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 15);
             this.label6.TabIndex = 9;
@@ -205,6 +205,7 @@
             this.recommondGameButton.TabIndex = 8;
             this.recommondGameButton.Text = "推荐游戏";
             this.recommondGameButton.UseVisualStyleBackColor = true;
+            this.recommondGameButton.Click += new System.EventHandler(this.recommondGameButton_Click);
             // 
             // recommondUserButton
             // 
@@ -214,6 +215,7 @@
             this.recommondUserButton.TabIndex = 9;
             this.recommondUserButton.Text = "推荐玩家";
             this.recommondUserButton.UseVisualStyleBackColor = true;
+            this.recommondUserButton.Click += new System.EventHandler(this.recommondUserButton_Click);
             // 
             // MainForm
             // 
