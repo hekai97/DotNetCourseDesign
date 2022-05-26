@@ -13,17 +13,24 @@ namespace DotnetCourseDesign
 {
     public partial class MainForm : Form
     {
+        List<string> userNameList = new List<string>();
         List<UsersWithGamesModel> userList = new List<UsersWithGamesModel>();
         public MainForm()
         {
-            
             InitializeComponent();
+            showUsersListBox.DataSource = userNameList;
         }
 
         private void showUsersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            showUserPlayedGames.DataSource = null;
             int selectIndex=showUsersListBox.SelectedIndex;
-            showUserPlayedGames.DataSource = userList[selectIndex].Games;
+            //这里之所以判断，是因为当把显示用户名的listbox的数据源设置为null之后，会执行这个方法
+            //此时listbox失去了数据源，索引值会变为-1
+            if (selectIndex >= 0)
+            {
+                showUserPlayedGames.DataSource = userList[selectIndex].Games;
+            }
         }
 
         private void addButton_Click(object sender, EventArgs e)
@@ -42,15 +49,20 @@ namespace DotnetCourseDesign
                 }
                 int index=FindUserIndexByName(userName);
                 userList[index].Games.Add(gameName);
+                showUserPlayedGames.DataSource = null;
+                showUserPlayedGames.DataSource = userList[index].Games;
             }
             else
             {
+                userNameList.Add(userName);
                 UsersWithGamesModel user = new UsersWithGamesModel();
                 user.Name = userNameInputTextBox.Text;
                 user.Games.Add(userInputGameTextBox.Text);
                 userList.Add(user);
             }
 
+            showUsersListBox.DataSource = null;
+            showUsersListBox.DataSource = userNameList;
             int selectIndex = FindUserIndexByName(userName);
             showUsersListBox.SelectedIndex = selectIndex;
         }
