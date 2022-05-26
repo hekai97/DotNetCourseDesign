@@ -88,6 +88,7 @@ namespace DataGenerationConsole
             stopwatch.Stop();
             Console.WriteLine(stopwatch.Elapsed.TotalMilliseconds);
             Console.ReadLine();
+            Console.WriteLine("yqynb");
         }
     }
     class WriteToFile
