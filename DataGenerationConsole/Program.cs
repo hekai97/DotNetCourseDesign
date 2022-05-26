@@ -57,6 +57,7 @@ namespace DataGenerationConsole
             WriteToFile writeToFile = new WriteToFile();
             writeToFile.initGameName(basePath, 10000);
             writeToFile.GenerationGamesToDataBases(basePath);
+
         }
 
         public static void TestReadSpeed()
@@ -87,6 +88,7 @@ namespace DataGenerationConsole
             stopwatch.Stop();
             Console.WriteLine(stopwatch.Elapsed.TotalMilliseconds);
             Console.ReadLine();
+            Console.WriteLine("yqynb");
 
             Console.WriteLine("执行完毕");
         }
