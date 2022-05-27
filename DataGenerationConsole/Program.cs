@@ -72,12 +72,24 @@ namespace DataGenerationConsole
             usersWithGamesModel.Games.Add("游戏9996");
             usersWithGamesModel.Games.Add("游戏9995");
             usersWithGamesModel.Games.Add("游戏9994");
+
+            UsersWithGamesModel usersWithGamesModel2 = new UsersWithGamesModel();
+            usersWithGamesModel2.Games.Add("游戏10000");
+            usersWithGamesModel2.Games.Add("游戏9999");
+            usersWithGamesModel2.Games.Add("游戏9998");
+            usersWithGamesModel2.Games.Add("游戏9997");
+            usersWithGamesModel2.Games.Add("游戏9996");
+            usersWithGamesModel2.Games.Add("游戏9995");
+            usersWithGamesModel2.Games.Add("游戏9994");
+
+            List<UsersWithGamesModel> otherUsers = new List<UsersWithGamesModel>();
+            otherUsers.Add(usersWithGamesModel2);
             GameCaculator gameCaculator = new GameCaculator();
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-
-            List<GameModel> res=gameCaculator.RecommondGames(ref usersWithGamesModel,ref result, 100);
+            gameCaculator.RecommondGames(ref usersWithGamesModel2, ref result);
+            List<GameModel> res=gameCaculator.RecommondGames(ref usersWithGamesModel,ref result);
             foreach (GameModel gameModel in res)
             {
                 Console.WriteLine(gameModel.GameId);
@@ -91,6 +103,15 @@ namespace DataGenerationConsole
             Console.WriteLine("yqynb");
 
             Console.WriteLine("执行完毕");
+            foreach(float t in usersWithGamesModel.Evaluation)
+            {
+                Console.WriteLine(t);
+            }
+            List<(UsersWithGamesModel, float)> res1 = gameCaculator.Similarity(usersWithGamesModel, ref otherUsers);
+            foreach(var t in res1)
+            {
+                Console.WriteLine(t.Item2);
+            }
         }
     }
     class WriteToFile

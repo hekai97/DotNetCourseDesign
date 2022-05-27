@@ -49,21 +49,36 @@ namespace ClassModel
         List<Point> hexagonPoints { get; }
         public float GetArea()
         {
-            float area = client.Invoke<float>("getArea",new object[] {hexagonPoints});
+            float area =Convert.ToSingle(client.Invoke<string>("getArea",new object[] {HexagonPointToString(hexagonPoints) }));
             return area;
         }
         public float GetOverloapArea(MyHexagon anotherHexagon)
         {
-            bool isOverloap= client.Invoke<bool>("isOverloap", new object[] { this.hexagonPoints,anotherHexagon.hexagonPoints });
+            
+            string isOverloapString= client.Invoke<string>("isOverloap", new object[] { HexagonPointToString(this.hexagonPoints),HexagonPointToString(anotherHexagon.hexagonPoints) });
+            bool isOverloap = isOverloapString.Equals("True");
             if (!isOverloap)
             {
                 return 0.0f;
             }
             else
             {
-                float overloapArea = client.Invoke<float>("getOverloapArea", new object[] { this.hexagonPoints, anotherHexagon.hexagonPoints });
+                float overloapArea = Convert.ToSingle(client.Invoke<string>("getOverloapArea", new object[] { HexagonPointToString(this.hexagonPoints), HexagonPointToString(anotherHexagon.hexagonPoints) }));
                 return overloapArea;
             }
+        }
+        private string HexagonPointToString(List<Point> points)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach(Point point in points)
+            {
+                stringBuilder.Append(point.x.ToString());
+                stringBuilder.Append(",");
+                stringBuilder.Append(point.y.ToString());
+                stringBuilder.Append("/");
+            }
+            stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            return stringBuilder.ToString();
         }
     }
 }

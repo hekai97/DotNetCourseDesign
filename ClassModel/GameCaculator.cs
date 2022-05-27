@@ -70,17 +70,24 @@ namespace ClassModel
         /// 该方法的作用是计算一个用户与另一个用户的相似度
         /// </summary>
         /// <param name="usersWithGames">待计算的用户</param>
-        /// <param name="usersWithGamesModels">用来对比的用户列表</param>
+        /// <param name="otherUsersWithGamesModels">用来对比的用户列表</param>
         /// <param name="value">控制参数，用于控制返回数据的长度，比如给该用户返回5个相似的人，则value=5</param>
         /// <returns>返回一个列表，该列表中存在两个item，第一个item是相似的人，第二个item是相似度，float类型</returns>
         /// <exception cref="IndexOutOfRangeException">当输入的value大于用户列表长度的时候会抛出该异常</exception>
-        public List<(UsersWithGamesModel, float)> Similarity(UsersWithGamesModel usersWithGames,ref List<UsersWithGamesModel> usersWithGamesModels, int value=1)
+        public List<(UsersWithGamesModel, float)> Similarity(UsersWithGamesModel usersWithGames,ref List<UsersWithGamesModel> otherUsersWithGamesModels, int value=1)
         {
             if (value > usersWithGames.Games.Count)
             {
                 throw new IndexOutOfRangeException();
             }
-            return null;
+            List<(UsersWithGamesModel, float)> usersAndSimilarityPercent = new List<(UsersWithGamesModel, float)>();
+            foreach (UsersWithGamesModel usersWithGame in otherUsersWithGamesModels)
+            {
+                usersAndSimilarityPercent.Add((usersWithGame, SimilarityInSingleUser(usersWithGames, usersWithGame)));
+            }
+            List<(UsersWithGamesModel,float)> temp = usersAndSimilarityPercent.OrderByDescending(x => x.Item2).ToList();
+            List<(UsersWithGamesModel, float)> result = temp.GetRange(0, value);
+            return result;
         }
         #endregion
 
@@ -93,9 +100,13 @@ namespace ClassModel
         /// <returns>两个用户之间的相似度</returns>
         private float SimilarityInSingleUser(UsersWithGamesModel usersWithGames1, UsersWithGamesModel usersWithGames2)
         {
+            if (usersWithGames2.Evaluation.Count == 0)
+            {
+                return 0.0f;
+            }
             MyHexagon hexagon1 = new MyHexagon(usersWithGames1.Evaluation);
             MyHexagon hexagon2 = new MyHexagon(usersWithGames2.Evaluation);
-            return hexagon1.GetOverloapArea(hexagon2);
+            return hexagon1.GetOverloapArea(hexagon2)/hexagon1.GetArea();
         }
         #endregion
 
