@@ -287,12 +287,23 @@ namespace ClassModel
             //降序排序
             List<(GameModel, float)> orderedGameWithOverview = gameWithOverview.OrderByDescending(a => a.Item2).ToList();
             //填充result至value个
-            for (int i = 0; i < value; i++)
+            int rcount = 0;
+            int i = 0;
+            while (true)
             {
-                if (i < orderedGameWithOverview.Count)
+                //游戏数量达到输出要求
+                if (rcount >= value)
+                    break;
+                //备选游戏数量不足
+                if (i >= orderedGameWithOverview.Count)
+                    break;
+                //如果游戏不存在于喜欢列表 推荐之
+                if (!existGamesModel.Contains(orderedGameWithOverview[i].Item1))
                 {
                     result.Add(orderedGameWithOverview[i].Item1);
+                    rcount++;
                 }
+                i++;
             }
 
             return result;
@@ -331,14 +342,18 @@ namespace ClassModel
                 }
             }
 
-
             //算出不存在标签的权值之和
-            foreach (var i in hashtable)
+            foreach (String i in hashtable.Keys)
+            {
                 retUnExist += (float)hashtable[i];
+            }
+                
 
             //算出六部图的比例和
             for (int i = 0; i < evaluationListPercent.Count; i++)
+            {
                 retEvaluation += evaluationListPercent[i] * evaluationListPercentOfTheGame[i];
+            }
 
             //上面三个相加，得到总体评价
             float ret = (float)((retExist * existTagsWeight + retUnExist * (1.0 - existTagsWeight)) * tagsWeight + retEvaluation * (1 - tagsWeight));
