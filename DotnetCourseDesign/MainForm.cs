@@ -14,17 +14,26 @@ namespace DotnetCourseDesign
 {
     public partial class MainForm : Form
     {
+        //游戏计算的类
         GameCaculator gameCaculator=new GameCaculator();
+        //操作数据库的几个类
         GameOperator gameOperator = new GameOperator();
         UserOperator userOperator = new UserOperator();
+        //当前选中的用户，就是在ListBox中点击的那个
         UsersWithGamesModel selectedUser = null;
+        //所有游戏的合集
         List<GameModel> allGames;
+        //推荐的游戏，这个列表只要按下推荐游戏就会把之前的数据清除掉
+        List<GameModel> recommondedGames;
 
+        //用户名字的列表，该列表作为Listbox的数据源使用
         List<string> userNameList = new List<string>();
+        //用户的列表，该列表表示此时的输入的用户数和所有的属性值
         List<UsersWithGamesModel> userList = new List<UsersWithGamesModel>();
         public MainForm()
         {
             InitializeComponent();
+            UserNameLabelBesideHexagon.Text = "";
 
             allGames=gameOperator.GetAllGameList();
 
@@ -39,7 +48,11 @@ namespace DotnetCourseDesign
             if (selectIndex >= 0)
             {
                 showUserPlayedGames.DataSource = userList[selectIndex].Games;
+                selectedUser=userList[selectIndex];
+                UserNameLabelBesideHexagon.Text = selectedUser.Name;
+                DrawerUserHexagon();
             }
+            
         }
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -114,17 +127,91 @@ namespace DotnetCourseDesign
         {
             if (selectedUser != null)
             {
-                List<GameModel> recommondedGames = gameCaculator.RecommondGames(ref selectedUser, ref allGames);
+                if (recommondedGames != null)
+                {
+                    recommondedGames.Clear();
+                }
+                recommondedGames = gameCaculator.RecommondGames(ref selectedUser, ref allGames);
+                showRecommondGamesListBox.Items.Clear();
+                foreach(GameModel game in recommondedGames)
+                {
+                    showRecommondGamesListBox.Items.Add(game.GameName);
+                }
             }
             else
             {
                 MessageBox.Show("请先添加用户","提示",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+            DrawerUserHexagon();
         }
 
         private void recommondUserButton_Click(object sender, EventArgs e)
         {
+            if (selectedUser == null)
+            {
+                MessageBox.Show("请先添加用户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            showRecommondPersonsListBox.Items.Clear();
+            try
+            {
+                List<(UsersWithGamesModel, float)> recommondPerson = gameCaculator.Similarity(selectedUser, ref userList);
+                if(recommondPerson == null)
+                {
+                    MessageBox.Show("请先添加更多用户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                foreach (var person in recommondPerson)
+                {
+                    showRecommondPersonsListBox.Items.Add($"{person.Item1.Name}---相似度---{person.Item2 * 100}%");
+                }
+            }catch(IndexOutOfRangeException)
+            {
+                MessageBox.Show("请先添加用户", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void showRecommondGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectIndex = showRecommondGamesListBox.SelectedIndex;
+            List<string> selectedGameTags = new List<string>();
+            GameModel selectedGame=recommondedGames[selectIndex];
+            foreach(var t in selectedGame.GameTagsAndWeights)
+            {
+                selectedGameTags.Add(t.Item1.ToString());
+            }
+            showRecommondGameTagsListBox.Items.Clear();
+            foreach(var t in selectedGameTags)
+            {
+                showRecommondGameTagsListBox.Items.Add(t);
+            }
 
         }
+
+        #region 绘图
+        private void DrawerUserHexagon()
+        {
+            if (selectedUser == null||selectedUser.Evaluation.Count==0)
+            {
+                return;
+            }
+            Graphics e=pictureBox1.CreateGraphics();
+            Pen pen=new Pen(Color.Black,3);
+            e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(selectedUser.Evaluation).hexagonPoints));
+            //TODO 该处并未成功显示六边形
+            
+        }
+
+        private PointF[] GetPointsFromMyPoint(List<MyPoint> p)
+        {
+            List<PointF> tempResult = new List<PointF>();
+            foreach(MyPoint pt in p)
+            {
+                tempResult.Add(new PointF(pt.x*20, pt.y*20));
+            }
+            return tempResult.ToArray();
+        }
+        #endregion
     }
+
 }

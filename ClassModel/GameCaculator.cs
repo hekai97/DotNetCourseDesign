@@ -80,9 +80,19 @@ namespace ClassModel
             {
                 throw new IndexOutOfRangeException();
             }
+            //如果列表中只有一个用户并且该用户还是自己，那就返回空
+            if (otherUsersWithGamesModels.Contains(usersWithGames) && otherUsersWithGamesModels.Count == 1)
+            {
+                return null;
+            }
             List<(UsersWithGamesModel, float)> usersAndSimilarityPercent = new List<(UsersWithGamesModel, float)>();
             foreach (UsersWithGamesModel usersWithGame in otherUsersWithGamesModels)
             {
+                //剔除掉自己
+                if (usersWithGame.Name.Equals(usersWithGames.Name))
+                {
+                    continue;
+                }
                 usersAndSimilarityPercent.Add((usersWithGame, SimilarityInSingleUser(usersWithGames, usersWithGame)));
             }
             List<(UsersWithGamesModel,float)> temp = usersAndSimilarityPercent.OrderByDescending(x => x.Item2).ToList();
