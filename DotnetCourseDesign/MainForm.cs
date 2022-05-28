@@ -14,6 +14,9 @@ namespace DotnetCourseDesign
 {
     public partial class MainForm : Form
     {
+        const int LENGTH = 140;
+        
+
         //游戏计算的类
         GameCaculator gameCaculator=new GameCaculator();
         //操作数据库的几个类
@@ -38,6 +41,10 @@ namespace DotnetCourseDesign
             allGames=gameOperator.GetAllGameList();
 
             showUsersListBox.DataSource = userNameList;
+
+            pictureBox1.Width = LENGTH + 10;
+            pictureBox1.Width = LENGTH + 10;
+            pictureBox1.Padding = new Padding(5, 5, 5, 5);
         }
         private void showUsersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -195,9 +202,28 @@ namespace DotnetCourseDesign
             {
                 return;
             }
+            Point[] points = new Point[6];
+            points[0].X = 0;
+            points[0].Y = 70;
+
+            points[1].X = 35;
+            points[1].Y = 140;
+
+            points[2].X = 105;
+            points[2].Y = 140;
+
+            points[3].X = 140;
+            points[3].Y = 70;
+
+            points[4].X = 105;
+            points[4].Y = 0;
+
+            points[5].X = 35;
+            points[5].Y = 0;
             Graphics e=pictureBox1.CreateGraphics();
-            Pen pen=new Pen(Color.Black,3);
+            Pen pen=new Pen(Color.Black);
             e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(selectedUser.Evaluation).hexagonPoints));
+            e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(new List<float>() { 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f }).hexagonPoints));
             //TODO 该处并未成功显示六边形
             
         }
@@ -207,7 +233,7 @@ namespace DotnetCourseDesign
             List<PointF> tempResult = new List<PointF>();
             foreach(MyPoint pt in p)
             {
-                tempResult.Add(new PointF(pt.x*20, pt.y*20));
+                tempResult.Add(new PointF(pt.x*14, pt.y*14));
             }
             return tempResult.ToArray();
         }
