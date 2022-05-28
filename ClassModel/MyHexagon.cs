@@ -16,7 +16,7 @@ namespace ClassModel
     {
         Client client;
         //六边形内部最长半边的长度
-        float hexagonMaxLength = 10;
+        public const float hexagonMaxLength = 10.0f;
         
         public MyHexagon(List<float> hexagonPoint)
         {
@@ -27,22 +27,22 @@ namespace ClassModel
             //TODO  从用户的六部图中把六边形的顶点算出来
             MyPoint[] points=new MyPoint[6];
             points[0].x = hexagonMaxLength - hexagonPoint[0];
-            points[0].y = (5 *sqrt3);
+            points[0].y = ((hexagonMaxLength/2) *sqrt3);
 
             points[1].x = hexagonMaxLength - hexagonPoint[1]*cos60;
-            points[1].y = 5 * sqrt3 + hexagonPoint[1] * sin60;
+            points[1].y = (hexagonMaxLength/2) * sqrt3 + hexagonPoint[1] * sin60;
 
-            points[2].x = 10 + hexagonPoint[2] * cos60;
-            points[2].y = 5 * sqrt3 + hexagonPoint[2] * sin60;
+            points[2].x = hexagonMaxLength + hexagonPoint[2] * cos60;
+            points[2].y = (hexagonMaxLength/2) * sqrt3 + hexagonPoint[2] * sin60;
 
-            points[3].x = 10 + hexagonPoint[3];
-            points[3].y = 5 * sqrt3 - hexagonPoint[3] * cos60;
+            points[3].x = hexagonMaxLength + hexagonPoint[3];
+            points[3].y = (hexagonMaxLength/2) * sqrt3;
 
-            points[4].x=10+hexagonPoint[4]*cos60;
-            points[4].y=5*sqrt3-hexagonPoint[4] * sin60;
+            points[4].x=hexagonMaxLength+hexagonPoint[4]*cos60;
+            points[4].y=(hexagonMaxLength/2)*sqrt3-hexagonPoint[4] * sin60;
 
-            points[5].x=10-hexagonPoint[5]*cos60;
-            points[5].y=5*sqrt3-hexagonPoint[5] * sin60;
+            points[5].x=hexagonMaxLength-hexagonPoint[5]*cos60;
+            points[5].y=(hexagonMaxLength/2)*sqrt3-hexagonPoint[5] * sin60;
             //用定点值初始化类中的数据列表
             hexagonPoints = new List<MyPoint>(points);
 

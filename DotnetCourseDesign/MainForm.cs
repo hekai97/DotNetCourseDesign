@@ -45,6 +45,7 @@ namespace DotnetCourseDesign
             pictureBox1.Width = LENGTH + 10;
             pictureBox1.Width = LENGTH + 10;
             pictureBox1.Padding = new Padding(5, 5, 5, 5);
+            pictureBox1.CreateGraphics().Clear(Color.White);
         }
         private void showUsersListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -202,38 +203,42 @@ namespace DotnetCourseDesign
             {
                 return;
             }
-            Point[] points = new Point[6];
-            points[0].X = 0;
-            points[0].Y = 70;
-
-            points[1].X = 35;
-            points[1].Y = 140;
-
-            points[2].X = 105;
-            points[2].Y = 140;
-
-            points[3].X = 140;
-            points[3].Y = 70;
-
-            points[4].X = 105;
-            points[4].Y = 0;
-
-            points[5].X = 35;
-            points[5].Y = 0;
             Graphics e=pictureBox1.CreateGraphics();
+            e.Clear(Color.White);
             Pen pen=new Pen(Color.Black);
-            e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(selectedUser.Evaluation).hexagonPoints));
-            e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(new List<float>() { 10.0f, 10.0f, 10.0f, 10.0f, 10.0f, 10.0f }).hexagonPoints));
+
+            //首先绘制画板底部
+            //这个是比值，ratio的意思是界面上画板的半长度与用户六边形最大值的比值，该值用来缩放绘制的六边形大小
+            float ratio = (LENGTH / 2) / MyHexagon.hexagonMaxLength;
+            //该值用来绘制画板底部的十个逐渐变小的六边形。
+            float delta=MyHexagon.hexagonMaxLength;
+
+            while (delta >= 0)
+            {
+                List<float> temp = new List<float>();
+                for(int i = 0; i < 6; ++i)
+                {
+                    temp.Add(delta);
+                }
+                e.DrawPolygon(pen, GetPointsFromMyPoint(new MyHexagon(temp).hexagonPoints,ratio));
+                delta -= 1;
+            }
+
+            //绘制用户的数据，采用另一种颜色的笔
+            pen.Color = Color.Green;
+            Brush brush=new SolidBrush(Color.Green);
+            e.FillPolygon(brush, GetPointsFromMyPoint(new MyHexagon(selectedUser.Evaluation).hexagonPoints,ratio));
             //TODO 该处并未成功显示六边形
+            e.Dispose();
             
         }
 
-        private PointF[] GetPointsFromMyPoint(List<MyPoint> p)
+        private PointF[] GetPointsFromMyPoint(List<MyPoint> p,float rat)
         {
             List<PointF> tempResult = new List<PointF>();
             foreach(MyPoint pt in p)
             {
-                tempResult.Add(new PointF(pt.x*14, pt.y*14));
+                tempResult.Add(new PointF(pt.x*rat, pt.y*rat));
             }
             return tempResult.ToArray();
         }
