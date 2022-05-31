@@ -14,7 +14,7 @@ namespace DotnetCourseDesign
 {
     public partial class MainForm : Form
     {
-        const int LENGTH = 140;
+        const int LENGTH = 170;
         
 
         //游戏计算的类
@@ -42,8 +42,8 @@ namespace DotnetCourseDesign
 
             showUsersListBox.DataSource = userNameList;
 
-            pictureBox1.Width = LENGTH + 10;
-            pictureBox1.Width = LENGTH + 10;
+            pictureBox1.Width = LENGTH + 20;
+            pictureBox1.Height = LENGTH + 20;
             pictureBox1.Padding = new Padding(5, 5, 5, 5);
             pictureBox1.CreateGraphics().Clear(Color.White);
         }
@@ -205,7 +205,7 @@ namespace DotnetCourseDesign
             }
             Graphics e=pictureBox1.CreateGraphics();
             e.Clear(Color.White);
-            Pen pen=new Pen(Color.Black);
+            Pen pen=new Pen(Color.Gray);
 
             //首先绘制画板底部
             //这个是比值，ratio的意思是界面上画板的半长度与用户六边形最大值的比值，该值用来缩放绘制的六边形大小
@@ -224,11 +224,10 @@ namespace DotnetCourseDesign
                 delta -= 1;
             }
 
-            //绘制用户的数据，采用另一种颜色的笔
-            pen.Color = Color.Green;
+            //绘制用户的数据，采用另一种颜色的画刷
             Brush brush=new SolidBrush(Color.Green);
             e.FillPolygon(brush, GetPointsFromMyPoint(new MyHexagon(selectedUser.Evaluation).hexagonPoints,ratio));
-            //TODO 该处并未成功显示六边形
+
             e.Dispose();
             
         }

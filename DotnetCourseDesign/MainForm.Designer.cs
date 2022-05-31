@@ -102,9 +102,9 @@
             this.panel1.Controls.Add(this.showRecommondGamesListBox);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Location = new System.Drawing.Point(424, 28);
+            this.panel1.Location = new System.Drawing.Point(424, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(492, 400);
+            this.panel1.Size = new System.Drawing.Size(492, 445);
             this.panel1.TabIndex = 5;
             // 
             // UserNameLabelBesideHexagon
@@ -118,7 +118,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(61, 5);
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Location = new System.Drawing.Point(70, 42);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(160, 160);
             this.pictureBox1.TabIndex = 8;
@@ -128,7 +131,7 @@
             // 
             this.showRecommondGameTagsListBox.FormattingEnabled = true;
             this.showRecommondGameTagsListBox.ItemHeight = 15;
-            this.showRecommondGameTagsListBox.Location = new System.Drawing.Point(137, 203);
+            this.showRecommondGameTagsListBox.Location = new System.Drawing.Point(147, 250);
             this.showRecommondGameTagsListBox.Name = "showRecommondGameTagsListBox";
             this.showRecommondGameTagsListBox.Size = new System.Drawing.Size(122, 169);
             this.showRecommondGameTagsListBox.TabIndex = 7;
@@ -137,7 +140,7 @@
             // 
             this.showRecommondPersonsListBox.FormattingEnabled = true;
             this.showRecommondPersonsListBox.ItemHeight = 15;
-            this.showRecommondPersonsListBox.Location = new System.Drawing.Point(291, 203);
+            this.showRecommondPersonsListBox.Location = new System.Drawing.Point(301, 250);
             this.showRecommondPersonsListBox.Name = "showRecommondPersonsListBox";
             this.showRecommondPersonsListBox.Size = new System.Drawing.Size(176, 169);
             this.showRecommondPersonsListBox.TabIndex = 6;
@@ -145,7 +148,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(335, 176);
+            this.label5.Location = new System.Drawing.Point(298, 232);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(97, 15);
             this.label5.TabIndex = 5;
@@ -155,7 +158,7 @@
             // 
             this.showRecommondGamesListBox.FormattingEnabled = true;
             this.showRecommondGamesListBox.ItemHeight = 15;
-            this.showRecommondGamesListBox.Location = new System.Drawing.Point(20, 203);
+            this.showRecommondGamesListBox.Location = new System.Drawing.Point(30, 250);
             this.showRecommondGamesListBox.Name = "showRecommondGamesListBox";
             this.showRecommondGamesListBox.Size = new System.Drawing.Size(118, 169);
             this.showRecommondGamesListBox.TabIndex = 4;
@@ -164,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 168);
+            this.label4.Location = new System.Drawing.Point(27, 232);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 15);
             this.label4.TabIndex = 3;
